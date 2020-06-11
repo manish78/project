@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+.my-bg{
+	background-color: #6D0EB1;
+}
+
+.navbar a{
+	color: white;
+}
+
+.add-header,.first-add-header,.second-add-header,.third-add-header{
+	font-family: "Righteous",sans-serif;
+	font-size: 120px;
+	letter-spacing: 10px;
+}
+
+.add-des{
+	font-family: "PT Sans Caption",sans-serif;
+	font-size: 30px;
+}
+
+.text-white{
+	color: white;
+}
+
+.carousel-indicators{
+	bottom: -30px;
+}
+
+.carousel-indicators li{
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+.carousel-indicators li.active{
+	background-color: yellow;
+}
+
+#sh{
+	top: 7px;
+	right: 20px;
+	width: 395px;
+}
+
+#header-slider h1{
+	position:relative;
+}
+
+.our-story h2{
+	font-family: 'PT Sans Caption',sans-serif;
+}
+
+.our-story h5{
+font-family: verdana;
+font-size: 18px;
+text-align: justify;
+}
+
+.our-story p{
+	text-align: justify;
+	color:#323232;
+	letter-spacing: 1px;
+	line-height: 25px; 
+}
+
+.our-story .nav-link{
+	border:none;
+}
+.our-story .nav-link.active{
+	color: red;
+	background-image: url(../image/hover.png);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: 70% 15px;
+	padding-bottom: 10px;
+	-webkit-animation:hover 1s;
+	-o-animation:hover 1s;
+	-moz-animation:hover 1s;
+	animation:hover 1s;
+
+}
+
+@keyframes hover{
+	0%{
+		background-size: 0 0;
+	}
+
+	100%{
+		background-size: 70% 15px;
+	}
+}
+
+.size{
+	font-size: 23px !important;
+	margin-right: 10px;
+}
+
+.bg-white{
+	background-color: white;
+}
+
+.study-us .card{
+	width: 250px;
+	height: 300px;
+	overflow: hidden;
+	border:none;
+}
+
+.study-us img,.study-us .btn-box{
+	position: absolute;
+}
+
+.study-us .btn-box{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.8);
+	display: none;
+}
+
+.study-us .btn-box div{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: 90%;
+	text-align: center;
+	color: white;
+}
+
+.study-us .card:hover img{
+	transform: scale(1.2);
+	transition: 1s;
+
+}
+
+.study-us .card:hover .btn-box{
+	display: block;
+}
+
+#c-input input{
+	border-radius: 20px !important;
+	background-color: lightgrey !important;
+	outline: none !important;
+}
+
+#c-input textarea{
+
+border-radius: 10px !important;
+	background-color: lightgrey !important;
+	outline: none !important;
+
+	}
+
+	hr{
+		margin: 0;
+		padding: 0;
+		margin-bottom: 10px;
+	}
+
+	#c-input{
+		color: black;
+		font-weight: 400;
+	}
