@@ -1,0 +1,96 @@
+public function makeZipFilePdf()
+    {
+        $files = array('https://media.geeksforgeeks.org/wp-content/uploads/gfg-40.png', 'http://localhost/projects/print-platform/code/public/d1.jpg','http://localhost/projects/print-platform/code/public/d2.jpg');
+       # define file array
+       
+
+        # create new zip object
+        $zip = new ZipArchive();
+
+        # create a temp file & open it
+        //$tmp_file = tempnam('.', '');
+        
+        if(file_exists(public_path('PrintsAds.zip')))
+        {
+            unlink(public_path('PrintsAds.zip'));
+        }
+        $zip->open(public_path('PrintsAds.zip'), ZipArchive::CREATE);
+
+        # loop through each file
+        foreach ($files as $file) {
+            # download file
+            $download_file = file_get_contents($file);
+            //print_r($download_file);exit;
+            #add it to the zip
+            $zip->addFromString(basename($file), $download_file);
+        }
+
+        # close zip
+        $zip->close();
+
+
+
+         //here get number of pages in each pdf file
+         $pdftext = file_get_contents(public_path('p2.pdf'));
+         $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
+    
+         //end here-------------------------
+
+
+        //unzip file
+
+        $zip = new ZipArchive;
+        $res = $zip->open(public_path('PrintsAds.zip'));
+        if ($res === TRUE) {
+          $zip->extractTo(public_path('/PDF'));
+          $zip->close();
+          echo 'woot!';
+        } else {
+          echo 'doh!';
+        }
+        //unzip end
+
+
+        //get all files from folders
+
+        $path = public_path('/PDF');
+        $files = scandir($path);
+        //dd($files);
+        //end here
+
+
+        //
+
+        //Storage::disk('local')->put('test.pdf', file_get_contents('http://www.africau.edu/images/default/sample.pdf'));
+
+        $outputFile = public_path('p2.pdf');
+        // fill data
+        $this->fillPDF(public_path('p2.pdf'), $outputFile);
+
+        
+        return response()->file($outputFile);
+        //return response()->download(public_path('PrintsAds.zip'));
+    }
+
+    public function fillPDF($file, $outputFile)
+    {
+        $fpdi = new Fpdi;
+        // merger operations
+        $count = $fpdi->setSourceFile($file);
+        //print_r($count);exit;
+        for ($i=1; $i<=$count; $i++) {
+            $template   = $fpdi->importPage($i);
+            $size       = $fpdi->getTemplateSize($template);
+            $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
+            $fpdi->useTemplate($template);
+            $left = 200;
+            $top = 10;
+            $text = $i;
+            $fpdi->SetFont("helvetica", "", 15);
+            $fpdi->SetTextColor(153,0,153);
+            //$fpdi->Text($left,$top,$text);
+            $fpdi->SetY(-10);
+            $fpdi->Image('http://localhost/projects/print-platform/code/public/d2.jpg',0,150,350,40);
+        }
+        return $fpdi->Output($outputFile, 'F');
+    }
