@@ -1,3 +1,7 @@
+ step 1:composer require setasign/fpdf
+ composer require setasign/fpdi
+
+ step 2:
  public function fillPDF($file, $outputFile)
     {
         $fpdi = new Fpdi;
