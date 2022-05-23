@@ -1,0 +1,32 @@
+ public function fillPDF($file, $outputFile)
+    {
+        $fpdi = new Fpdi;
+        // merger operations
+        $count = $fpdi->setSourceFile($file);
+        //print_r($count);exit;
+        for ($i=1; $i<=$count; $i++) {
+            $template   = $fpdi->importPage($i);
+            $size       = $fpdi->getTemplateSize($template);
+            $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
+            $fpdi->useTemplate($template);
+            $left = 200;
+            $top = 10;
+            $text = $i;
+            $fpdi->SetFont("helvetica", "", 15);
+            $fpdi->SetTextColor(153,0,153);
+            //$fpdi->Text($left,$top,$text);
+            $fpdi->SetY(-6);
+            
+           
+            $image_info = getimagesize("http://localhost/projects/print-platform/code/public/t1.jpg");
+            if($image_info[0] == 350)
+            {
+                $fpdi->Image('http://localhost/projects/print-platform/code/public/t2.jpg',130,170,0,0);
+            }
+            else
+            {
+                $fpdi->Image('http://localhost/projects/print-platform/code/public/t1.jpg',70,170,0,0);
+            }
+        }
+        return $fpdi->Output($outputFile, 'F');
+    }
