@@ -1,0 +1,29 @@
+public function makeZipFilePdf()
+    {
+        $files = array('http://localhost/projects/print-platform/code/public/p1', 'http://localhost/projects/print-platform/code/public/d2.jpg');
+       # define file array
+       
+
+        # create new zip object
+        $zip = new ZipArchive();
+
+        # create a temp file & open it
+        //$tmp_file = tempnam('.', '');
+        
+        if(file_exists(public_path('PrintsAds.zip')))
+        {
+            unlink(public_path('PrintsAds.zip'));
+        }
+        $zip->open(public_path('PrintsAds.zip'), ZipArchive::CREATE);
+
+        # loop through each file
+        foreach ($files as $file) {
+            # download file
+            $download_file = file_get_contents($file);
+            //print_r($download_file);exit;
+            #add it to the zip
+            $zip->addFromString(basename($file), $download_file);
+        }
+
+        # close zip
+        $zip->close();
