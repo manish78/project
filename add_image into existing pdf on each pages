@@ -2,7 +2,23 @@
  composer require setasign/fpdi
 
  step 2:
- public function fillPDF($file, $outputFile)
+ 
+ 
+ //get all files from folders and add ads on every pdf
+ 
+        $path = public_path('/PDF');
+        $files = scandir($path);
+        foreach($files as $file)
+        {
+            if(is_file($file))
+            {
+                $this->fillPDF(public_path($file), public_path('PDF/'.$file));
+            }
+        }     
+        
+        
+        
+public function fillPDF($file, $outputFile)
     {
         $fpdi = new Fpdi;
         // merger operations
@@ -22,7 +38,7 @@
             $fpdi->SetY(-6);
             
            
-            $image_info = getimagesize("http://localhost/projects/print-platform/code/public/t1.jpg");
+            $image_info = getimagesize("http://localhost/projects/print-platform/code/public/t2.jpg");
             if($image_info[0] == 350)
             {
                 $fpdi->Image('http://localhost/projects/print-platform/code/public/t2.jpg',130,170,0,0);
