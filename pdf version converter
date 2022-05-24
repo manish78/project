@@ -1,0 +1,22 @@
+        step 1:sudo apt-get update
+                sudo apt-get install ghostscript
+        
+        step 2 : $pdf=$_FILES['file'];
+
+               //The PDF version that you want to convert
+              //the file into.
+              $pdfVersion = "1.4";
+
+              //The path that you want to save the new
+              //file to
+              $newFile =Storage::path('files/'.$pdf['name']);
+
+              //The path of the file that you want
+              //to convert
+              $currentFile = public_path('t1.pdf');
+
+              //Create the GhostScript command
+              $gsCmd = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=$pdfVersion -dNOPAUSE -dBATCH -sOutputFile=$newFile $currentFile";
+
+              //Run it using PHP's exec function.
+              exec($gsCmd);
