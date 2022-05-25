@@ -1,0 +1,15 @@
+Route::get('datatable/{id}', function(UsersDataTable $dataTable, $id){
+   return $dataTable->with('id', $id)
+           ->with([
+                'key2' => 'value2',
+                'key3' => 'value3',
+           ])
+           ->render('path.to.view');
+});
+You can then get the variable as a local property of the class.
+
+class UsersDataTable {
+    public function query() {
+        return User::where('id', $this->id);
+    }
+}
