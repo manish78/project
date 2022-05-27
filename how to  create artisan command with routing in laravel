@@ -1,0 +1,11 @@
+Route::get('/seed/{dbseed}', function ($seed) {
+        $exitCode = Artisan::call('db:seed --class=' . $seed);
+        dump($exitCode);
+        return 'db seed';
+    });
+
+    Route::get('/migration/{migrate}', function ($seed) {
+        $exitCode = Artisan::call($seed);
+        dump($exitCode);
+        return 'migrated';
+    });
