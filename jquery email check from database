@@ -1,0 +1,34 @@
+email_id: {
+            required: true,
+            email: true,
+            remote:{
+                url:"{{route('agent.user.email')}}",
+                method:'POST',
+                data:{email_id: function() {return $('#email_id').val();}}
+            }
+        },
+        
+        
+        
+        
+    public function validateEmail(Request $request)
+    {
+        
+        $data=User::where('email_id',$request->email_id)->get()->toArray();
+        //return array(count($data));
+        $return='';
+        if(count($data) > 0)
+        {
+        
+            $return=false;
+        }
+        else
+        {
+            
+            $return=true;
+        }
+
+        echo json_encode($return);
+        exit;
+       
+    }
